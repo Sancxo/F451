@@ -1,0 +1,43 @@
+<h1>Show Author</h1>
+
+<ul>
+
+  <li>
+    <strong>Last name:</strong>
+    <%= @author.last_name %>
+  </li>
+
+  <li>
+    <strong>First name:</strong>
+    <%= @author.first_name %>
+  </li>
+
+  <li>
+    <strong>Country:</strong>
+    <%= @author.country %>
+  </li>
+
+  <li>
+    <strong>Birthdate:</strong>
+    <%= @author.birthdate %>
+  </li>
+
+  <li>
+    <strong>Death date:</strong>
+    <%= @author.death_date %>
+  </li>
+
+  <li>
+    <strong>Avatar:</strong>
+    <%= @author.avatar %>
+  </li>
+
+  <li>
+    <strong>Biography:</strong>
+    <%= @author.biography %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.author_path(@conn, :edit, @author) %></span> |
+<span><%= link "Back", to: Routes.author_path(@conn, :index) %></span>
