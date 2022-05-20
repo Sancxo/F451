@@ -1,0 +1,13 @@
+<h1>Show Country</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @country.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.country_path(@conn, :edit, @country) %></span> |
+<span><%= link "Back", to: Routes.country_path(@conn, :index) %></span>

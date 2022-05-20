@@ -6,10 +6,11 @@ defmodule F451.Library.Author do
     field :avatar, :string
     field :biography, :string
     field :birthdate, :date
-    field :country, :string
     field :death_date, :date
     field :first_name, :string
     field :last_name, :string
+
+    belongs_to :country, F451.Library.Country
 
     timestamps()
   end
@@ -20,12 +21,12 @@ defmodule F451.Library.Author do
     |> cast(attrs, [
       :last_name,
       :first_name,
-      :country,
+      :country_id,
       :birthdate,
       :death_date,
       :avatar,
       :biography
     ])
-    |> validate_required([:last_name, :first_name, :country, :birthdate])
+    |> validate_required([:last_name, :birthdate])
   end
 end

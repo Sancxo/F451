@@ -23,4 +23,18 @@ defmodule F451.LibraryFixtures do
 
     author
   end
+
+  @doc """
+  Generate a country.
+  """
+  def country_fixture(attrs \\ %{}) do
+    {:ok, country} =
+      attrs
+      |> Enum.into(%{
+        name: "some name"
+      })
+      |> F451.Library.create_country()
+
+    country
+  end
 end

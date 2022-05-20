@@ -20,6 +20,7 @@ defmodule F451Web.Router do
     get "/", PageController, :index
 
     resources "/authors", AuthorController
+    resources "/countries", CountryController
   end
 
   # Other scopes may use custom stacks.
