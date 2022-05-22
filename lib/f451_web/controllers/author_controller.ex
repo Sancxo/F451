@@ -5,7 +5,7 @@ defmodule F451Web.AuthorController do
   alias F451.Library.Author
 
   def index(conn, _params) do
-    authors = Library.list_authors_with_preload() |> IO.inspect()
+    authors = Library.list_authors_with_preload()
 
     render(conn, "index.html", authors: authors)
   end
@@ -38,13 +38,15 @@ defmodule F451Web.AuthorController do
 
   def edit(conn, %{"id" => id}) do
     author = Library.get_author_with_preload!(id)
+    countries = Library.list_countries()
     changeset = Library.change_author(author)
 
-    render(conn, "edit.html", author: author, changeset: changeset)
+    render(conn, "edit.html", author: author, countries: countries, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "author" => author_params}) do
     author = Library.get_author_with_preload!(id)
+    countries = Library.list_countries()
 
     case Library.update_author(author, author_params) do
       {:ok, author} ->
@@ -53,7 +55,7 @@ defmodule F451Web.AuthorController do
         |> redirect(to: Routes.author_path(conn, :show, author))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", author: author, changeset: changeset)
+        render(conn, "edit.html", author: author, countries: countries, changeset: changeset)
     end
   end
 

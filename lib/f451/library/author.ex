@@ -27,6 +27,6 @@ defmodule F451.Library.Author do
       :avatar,
       :biography
     ])
-    |> validate_required([:last_name, :birthdate])
+    |> validate_required([:last_name, :birthdate, :country_id])
   end
 end
