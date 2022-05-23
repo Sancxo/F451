@@ -50,7 +50,8 @@ defmodule F451.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       # Waffle: file upload library (https://github.com/elixir-waffle/waffle)
-      {:waffle, "~> 1.1"}
+      {:waffle, "~> 1.1"},
+      {:waffle_ecto, "~> 0.0.11"}
     ]
   end
 

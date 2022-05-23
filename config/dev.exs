@@ -63,6 +63,10 @@ config :f451, F451Web.Endpoint,
     ]
   ]
 
+# Waffle config (to upload files)
+config :waffle,
+  storage: Waffle.Storage.Local
+
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
