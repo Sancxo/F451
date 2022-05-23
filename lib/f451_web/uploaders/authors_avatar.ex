@@ -37,7 +37,7 @@ defmodule F451.AuthorsAvatar do
   # end
 
   # Override the storage directory:
-  def storage_dir(_version, {file, scope}) do
+  def storage_dir(_version, {_file, scope}) do
     "uploads/authors/#{scope.id}"
   end
 
