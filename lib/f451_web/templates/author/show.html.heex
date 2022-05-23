@@ -29,7 +29,7 @@
 
   <li>
     <strong>Avatar:</strong>
-    <%= @author.avatar %>
+    <%= img_tag F451.AuthorsAvatar.url({@author.avatar, @author}, signed: true) %>
   </li>
 
   <li>

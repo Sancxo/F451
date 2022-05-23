@@ -1,9 +1,10 @@
 defmodule F451.Library.Author do
   use Ecto.Schema
+  use Waffle.Ecto.Schema
   import Ecto.Changeset
 
   schema "authors" do
-    field :avatar, :string
+    field :avatar, F451.AuthorsAvatar.Type
     field :biography, :string
     field :birthdate, :date
     field :death_date, :date
