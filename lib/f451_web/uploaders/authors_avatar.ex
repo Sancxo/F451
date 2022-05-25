@@ -3,6 +3,7 @@ defmodule F451.AuthorsAvatar do
   use Waffle.Ecto.Definition
 
   @versions [:original]
+  @white_list ~w(.jpg .jpeg .gif .png .webp .avif)
 
   # To add a thumbnail version:
   # @versions [:original, :thumb]
@@ -20,7 +21,7 @@ defmodule F451.AuthorsAvatar do
   def validate({file, _}) do
     file_extension = file.file_name |> Path.extname() |> String.downcase()
 
-    case Enum.member?(~w(.jpg .jpeg .gif .png .webp .avif), file_extension) do
+    case Enum.member?(@white_list, file_extension) do
       true -> :ok
       false -> {:error, "invalid file type"}
     end
@@ -32,13 +33,13 @@ defmodule F451.AuthorsAvatar do
   # end
 
   # Override the persisted filenames:
-  # def filename(version, _) do
-  #   version
-  # end
+  def filename(_version, {_file, author}) do
+    "#{author.id}_#{author.last_name}"
+  end
 
   # Override the storage directory:
-  def storage_dir(_version, {_file, scope}) do
-    "uploads/authors/#{scope.id}"
+  def storage_dir(_version, {_file, _scope}) do
+    "uploads/authors/"
   end
 
   # Provide a default URL if there hasn't been a file uploaded

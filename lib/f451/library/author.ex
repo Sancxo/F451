@@ -25,9 +25,9 @@ defmodule F451.Library.Author do
       :country_id,
       :birthdate,
       :death_date,
-      :avatar,
       :biography
     ])
+    |> cast_attachments(attrs, [:avatar])
     |> validate_required([:last_name, :birthdate, :country_id])
   end
 end
