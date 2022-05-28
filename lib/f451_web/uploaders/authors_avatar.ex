@@ -33,9 +33,9 @@ defmodule F451.AuthorsAvatar do
   # end
 
   # Override the persisted filenames:
-  def filename(_version, {_file, author}) do
-    "#{author.id}_#{author.last_name}"
-  end
+  # def filename(_version, {_file, author}) do
+  #   "#{author.id}_#{author.last_name}"
+  # end
 
   # Override the storage directory:
   def storage_dir(_version, {_file, _scope}) do
