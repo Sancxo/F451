@@ -37,4 +37,21 @@ defmodule F451.LibraryFixtures do
 
     country
   end
+
+  @doc """
+  Generate a reader.
+  """
+  def reader_fixture(attrs \\ %{}) do
+    {:ok, reader} =
+      attrs
+      |> Enum.into(%{
+        avatar: "some avatar",
+        first_name: "some first_name",
+        last_name: "some last_name",
+        pseudo: "some pseudo"
+      })
+      |> F451.Library.create_reader()
+
+    reader
+  end
 end

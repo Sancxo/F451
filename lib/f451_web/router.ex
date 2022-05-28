@@ -20,6 +20,8 @@ defmodule F451Web.Router do
     get "/", PageController, :index
 
     resources "/authors", AuthorController
+    resources "/readers", ReaderController
+
     resources "/countries", CountryController
   end
 

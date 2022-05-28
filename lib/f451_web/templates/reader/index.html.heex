@@ -1,0 +1,32 @@
+<h1>Listing Readers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Pseudo</th>
+      <th>Avatar</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for reader <- @readers do %>
+    <tr>
+      <td><%= reader.first_name %></td>
+      <td><%= reader.last_name %></td>
+      <td><%= reader.pseudo %></td>
+      <td><%= img_tag F451.ReadersAvatar.url({reader.avatar, reader}, signed: true) %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.reader_path(@conn, :show, reader) %></span>
+        <span><%= link "Edit", to: Routes.reader_path(@conn, :edit, reader) %></span>
+        <span><%= link "Delete", to: Routes.reader_path(@conn, :delete, reader), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Reader", to: Routes.reader_path(@conn, :new) %></span>

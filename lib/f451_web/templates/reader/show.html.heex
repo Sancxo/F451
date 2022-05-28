@@ -1,0 +1,28 @@
+<h1>Show Reader</h1>
+
+<ul>
+
+  <li>
+    <strong>First name:</strong>
+    <%= @reader.first_name %>
+  </li>
+
+  <li>
+    <strong>Last name:</strong>
+    <%= @reader.last_name %>
+  </li>
+
+  <li>
+    <strong>Pseudo:</strong>
+    <%= @reader.pseudo %>
+  </li>
+
+  <li>
+    <strong>Avatar:</strong>
+    <%= img_tag F451.ReadersAvatar.url({@reader.avatar, @reader}, signed: true) %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.reader_path(@conn, :edit, @reader) %></span> |
+<span><%= link "Back", to: Routes.reader_path(@conn, :index) %></span>

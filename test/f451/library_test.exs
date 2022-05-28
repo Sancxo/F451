@@ -122,4 +122,64 @@ defmodule F451.LibraryTest do
       assert %Ecto.Changeset{} = Library.change_country(country)
     end
   end
+
+  describe "readers" do
+    alias F451.Library.Reader
+
+    import F451.LibraryFixtures
+
+    @invalid_attrs %{avatar: nil, first_name: nil, last_name: nil, pseudo: nil}
+
+    test "list_readers/0 returns all readers" do
+      reader = reader_fixture()
+      assert Library.list_readers() == [reader]
+    end
+
+    test "get_reader!/1 returns the reader with given id" do
+      reader = reader_fixture()
+      assert Library.get_reader!(reader.id) == reader
+    end
+
+    test "create_reader/1 with valid data creates a reader" do
+      valid_attrs = %{avatar: "some avatar", first_name: "some first_name", last_name: "some last_name", pseudo: "some pseudo"}
+
+      assert {:ok, %Reader{} = reader} = Library.create_reader(valid_attrs)
+      assert reader.avatar == "some avatar"
+      assert reader.first_name == "some first_name"
+      assert reader.last_name == "some last_name"
+      assert reader.pseudo == "some pseudo"
+    end
+
+    test "create_reader/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Library.create_reader(@invalid_attrs)
+    end
+
+    test "update_reader/2 with valid data updates the reader" do
+      reader = reader_fixture()
+      update_attrs = %{avatar: "some updated avatar", first_name: "some updated first_name", last_name: "some updated last_name", pseudo: "some updated pseudo"}
+
+      assert {:ok, %Reader{} = reader} = Library.update_reader(reader, update_attrs)
+      assert reader.avatar == "some updated avatar"
+      assert reader.first_name == "some updated first_name"
+      assert reader.last_name == "some updated last_name"
+      assert reader.pseudo == "some updated pseudo"
+    end
+
+    test "update_reader/2 with invalid data returns error changeset" do
+      reader = reader_fixture()
+      assert {:error, %Ecto.Changeset{}} = Library.update_reader(reader, @invalid_attrs)
+      assert reader == Library.get_reader!(reader.id)
+    end
+
+    test "delete_reader/1 deletes the reader" do
+      reader = reader_fixture()
+      assert {:ok, %Reader{}} = Library.delete_reader(reader)
+      assert_raise Ecto.NoResultsError, fn -> Library.get_reader!(reader.id) end
+    end
+
+    test "change_reader/1 returns a reader changeset" do
+      reader = reader_fixture()
+      assert %Ecto.Changeset{} = Library.change_reader(reader)
+    end
+  end
 end
