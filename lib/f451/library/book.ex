@@ -22,7 +22,7 @@ defmodule F451.Library.Book do
   def changeset(book, attrs) do
     book
     |> cast(attrs, [:title, :file, :date, :cover, :synopsis])
-    |> validate_required([:title, :file, :date, :cover, :synopsis])
+    |> validate_required([:title, :date, :cover, :synopsis, :genre_id, :reader_id])
     |> foreign_key_constraint(:author_id)
     |> foreign_key_constraint(:reader_id)
     |> foreign_key_constraint(:genre_id)

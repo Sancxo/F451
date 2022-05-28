@@ -14,6 +14,7 @@
       <section class="container">
         <nav>
           <ul>
+            <li><%= link "Livres", to: Routes.book_path(@conn, :index) %></li>
             <li><%= link "Auteurs", to: Routes.author_path(@conn, :index) %></li>
             <li><%= link "Lecteurs", to: Routes.reader_path(@conn, :index) %></li>
             <%# if function_exported?(Routes, :live_dashboard_path, 2) do %>

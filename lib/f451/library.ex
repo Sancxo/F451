@@ -21,6 +21,14 @@ defmodule F451.Library do
     Repo.all(Author)
   end
 
+  @doc """
+  Returns the list of books with preload for Country.
+
+  ## Examples
+
+      iex> list_books_with_preload()
+      [%Book{%Country{}, ...}, ...]
+  """
   def list_authors_with_preload do
     Author
     |> Repo.all()
@@ -41,6 +49,7 @@ defmodule F451.Library do
       ** (Ecto.NoResultsError)
 
   """
+
   def get_author!(id), do: Repo.get!(Author, id)
 
   def get_author_with_preload!(id) do
@@ -421,6 +430,22 @@ defmodule F451.Library do
   """
   def list_books do
     Repo.all(Book)
+  end
+
+  @doc """
+  Returns the list of books with preload for Genre, Author and Reader.
+
+  ## Examples
+
+      iex> list_books_with_preload()
+      [%Book{%Genre{}, %Author{}, %Reader{}, ...}, ...]
+  """
+  def list_books_with_preload do
+    Book
+    |> Repo.all()
+    |> Repo.preload(:genre)
+    |> Repo.preload(:author)
+    |> Repo.preload(:reader)
   end
 
   @doc """

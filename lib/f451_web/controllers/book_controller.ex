@@ -5,13 +5,23 @@ defmodule F451Web.BookController do
   alias F451.Library.Book
 
   def index(conn, _params) do
-    books = Library.list_books()
+    books = Library.list_books_with_preload()
     render(conn, "index.html", books: books)
   end
 
   def new(conn, _params) do
+    genres = Library.list_genres()
+    authors = Library.list_authors()
+    readers = Library.list_readers()
+
     changeset = Library.change_book(%Book{})
-    render(conn, "new.html", changeset: changeset)
+
+    render(conn, "new.html",
+      changeset: changeset,
+      genres: genres,
+      authors: authors,
+      readers: readers
+    )
   end
 
   def create(conn, %{"book" => book_params}) do
@@ -22,7 +32,16 @@ defmodule F451Web.BookController do
         |> redirect(to: Routes.book_path(conn, :show, book))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        genres = Library.list_genres()
+        authors = Library.list_authors()
+        readers = Library.list_readers()
+
+        render(conn, "new.html",
+          changeset: changeset,
+          genres: genres,
+          readers: readers,
+          authors: authors
+        )
     end
   end
 
@@ -33,8 +52,18 @@ defmodule F451Web.BookController do
 
   def edit(conn, %{"id" => id}) do
     book = Library.get_book!(id)
+    genres = Library.list_genres()
+    authors = Library.list_authors()
+    readers = Library.list_readers()
     changeset = Library.change_book(book)
-    render(conn, "edit.html", book: book, changeset: changeset)
+
+    render(conn, "edit.html",
+      book: book,
+      changeset: changeset,
+      genres: genres,
+      authors: authors,
+      readers: readers
+    )
   end
 
   def update(conn, %{"id" => id, "book" => book_params}) do
@@ -47,7 +76,17 @@ defmodule F451Web.BookController do
         |> redirect(to: Routes.book_path(conn, :show, book))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", book: book, changeset: changeset)
+        genres = Library.list_genres()
+        authors = Library.list_authors()
+        readers = Library.list_readers()
+
+        render(conn, "edit.html",
+          book: book,
+          changeset: changeset,
+          genres: genres,
+          readers: readers,
+          authors: authors
+        )
     end
   end
 

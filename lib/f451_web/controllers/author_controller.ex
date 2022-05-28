@@ -18,8 +18,6 @@ defmodule F451Web.AuthorController do
   end
 
   def create(conn, %{"author" => author_params}) do
-    countries = Library.list_countries()
-
     case Library.create_author(author_params) do
       {:ok, author} ->
         conn
@@ -27,6 +25,7 @@ defmodule F451Web.AuthorController do
         |> redirect(to: Routes.author_path(conn, :show, author))
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        countries = Library.list_countries()
         render(conn, "new.html", changeset: changeset, countries: countries)
     end
   end
@@ -46,7 +45,6 @@ defmodule F451Web.AuthorController do
 
   def update(conn, %{"id" => id, "author" => author_params}) do
     author = Library.get_author_with_preload!(id)
-    countries = Library.list_countries()
 
     case Library.update_author(author, author_params) do
       {:ok, author} ->
@@ -55,6 +53,7 @@ defmodule F451Web.AuthorController do
         |> redirect(to: Routes.author_path(conn, :show, author))
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        countries = Library.list_countries()
         render(conn, "edit.html", author: author, countries: countries, changeset: changeset)
     end
   end
