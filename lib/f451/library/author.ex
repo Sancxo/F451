@@ -3,6 +3,8 @@ defmodule F451.Library.Author do
   use Waffle.Ecto.Schema
   import Ecto.Changeset
 
+  alias F451.Library.{Book, Country}
+
   schema "authors" do
     field :avatar, F451.AuthorsAvatar.Type
     field :biography, :string
@@ -11,7 +13,9 @@ defmodule F451.Library.Author do
     field :first_name, :string
     field :last_name, :string
 
-    belongs_to :country, F451.Library.Country
+    belongs_to :country, Country
+
+    has_many :books, Book
 
     timestamps()
   end
@@ -29,5 +33,6 @@ defmodule F451.Library.Author do
     ])
     |> cast_attachments(attrs, [:avatar])
     |> validate_required([:last_name, :birthdate, :country_id])
+    |> foreign_key_constraint(:country_id)
   end
 end

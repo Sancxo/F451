@@ -54,4 +54,36 @@ defmodule F451.LibraryFixtures do
 
     reader
   end
+
+  @doc """
+  Generate a genre.
+  """
+  def genre_fixture(attrs \\ %{}) do
+    {:ok, genre} =
+      attrs
+      |> Enum.into(%{
+        name: "some name"
+      })
+      |> F451.Library.create_genre()
+
+    genre
+  end
+
+  @doc """
+  Generate a book.
+  """
+  def book_fixture(attrs \\ %{}) do
+    {:ok, book} =
+      attrs
+      |> Enum.into(%{
+        cover: "some cover",
+        date: ~D[2022-05-27],
+        file: "some file",
+        synopsis: "some synopsis",
+        title: "some title"
+      })
+      |> F451.Library.create_book()
+
+    book
+  end
 end

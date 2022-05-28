@@ -21,7 +21,8 @@ defmodule F451Web.Router do
 
     resources "/authors", AuthorController
     resources "/readers", ReaderController
-
+    resources "/books", BookController
+    resources "/genres", GenreController
     resources "/countries", CountryController
   end
 

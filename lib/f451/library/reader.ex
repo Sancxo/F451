@@ -9,6 +9,8 @@ defmodule F451.Library.Reader do
     field :last_name, :string
     field :pseudo, :string
 
+    has_many :books, F451.Library.Book
+
     timestamps()
   end
 

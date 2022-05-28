@@ -182,4 +182,120 @@ defmodule F451.LibraryTest do
       assert %Ecto.Changeset{} = Library.change_reader(reader)
     end
   end
+
+  describe "genres" do
+    alias F451.Library.Genre
+
+    import F451.LibraryFixtures
+
+    @invalid_attrs %{name: nil}
+
+    test "list_genres/0 returns all genres" do
+      genre = genre_fixture()
+      assert Library.list_genres() == [genre]
+    end
+
+    test "get_genre!/1 returns the genre with given id" do
+      genre = genre_fixture()
+      assert Library.get_genre!(genre.id) == genre
+    end
+
+    test "create_genre/1 with valid data creates a genre" do
+      valid_attrs = %{name: "some name"}
+
+      assert {:ok, %Genre{} = genre} = Library.create_genre(valid_attrs)
+      assert genre.name == "some name"
+    end
+
+    test "create_genre/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Library.create_genre(@invalid_attrs)
+    end
+
+    test "update_genre/2 with valid data updates the genre" do
+      genre = genre_fixture()
+      update_attrs = %{name: "some updated name"}
+
+      assert {:ok, %Genre{} = genre} = Library.update_genre(genre, update_attrs)
+      assert genre.name == "some updated name"
+    end
+
+    test "update_genre/2 with invalid data returns error changeset" do
+      genre = genre_fixture()
+      assert {:error, %Ecto.Changeset{}} = Library.update_genre(genre, @invalid_attrs)
+      assert genre == Library.get_genre!(genre.id)
+    end
+
+    test "delete_genre/1 deletes the genre" do
+      genre = genre_fixture()
+      assert {:ok, %Genre{}} = Library.delete_genre(genre)
+      assert_raise Ecto.NoResultsError, fn -> Library.get_genre!(genre.id) end
+    end
+
+    test "change_genre/1 returns a genre changeset" do
+      genre = genre_fixture()
+      assert %Ecto.Changeset{} = Library.change_genre(genre)
+    end
+  end
+
+  describe "books" do
+    alias F451.Library.Book
+
+    import F451.LibraryFixtures
+
+    @invalid_attrs %{cover: nil, date: nil, file: nil, synopsis: nil, title: nil}
+
+    test "list_books/0 returns all books" do
+      book = book_fixture()
+      assert Library.list_books() == [book]
+    end
+
+    test "get_book!/1 returns the book with given id" do
+      book = book_fixture()
+      assert Library.get_book!(book.id) == book
+    end
+
+    test "create_book/1 with valid data creates a book" do
+      valid_attrs = %{cover: "some cover", date: ~D[2022-05-27], file: "some file", synopsis: "some synopsis", title: "some title"}
+
+      assert {:ok, %Book{} = book} = Library.create_book(valid_attrs)
+      assert book.cover == "some cover"
+      assert book.date == ~D[2022-05-27]
+      assert book.file == "some file"
+      assert book.synopsis == "some synopsis"
+      assert book.title == "some title"
+    end
+
+    test "create_book/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Library.create_book(@invalid_attrs)
+    end
+
+    test "update_book/2 with valid data updates the book" do
+      book = book_fixture()
+      update_attrs = %{cover: "some updated cover", date: ~D[2022-05-28], file: "some updated file", synopsis: "some updated synopsis", title: "some updated title"}
+
+      assert {:ok, %Book{} = book} = Library.update_book(book, update_attrs)
+      assert book.cover == "some updated cover"
+      assert book.date == ~D[2022-05-28]
+      assert book.file == "some updated file"
+      assert book.synopsis == "some updated synopsis"
+      assert book.title == "some updated title"
+    end
+
+    test "update_book/2 with invalid data returns error changeset" do
+      book = book_fixture()
+      assert {:error, %Ecto.Changeset{}} = Library.update_book(book, @invalid_attrs)
+      assert book == Library.get_book!(book.id)
+    end
+
+    test "delete_book/1 deletes the book" do
+      book = book_fixture()
+      assert {:ok, %Book{}} = Library.delete_book(book)
+      assert_raise Ecto.NoResultsError, fn -> Library.get_book!(book.id) end
+    end
+
+    test "change_book/1 returns a book changeset" do
+      book = book_fixture()
+      assert %Ecto.Changeset{} = Library.change_book(book)
+    end
+  end
 end
