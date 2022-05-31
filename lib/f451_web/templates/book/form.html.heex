@@ -14,15 +14,15 @@
   <%= error_tag f, :date %>
 
   <%= label f, :genre_id %>
-  <%= select f, :genre_id, @genres |> Enum.map(&{&1.name, &1.id}) %>
+  <%= select f, :genre_id, @genres |> Enum.map(&{&1.name, &1.id}), prompt: "" %>
   <%= error_tag f, :genre_id %>
 
   <%= label f, :author_id %>
-  <%= select f, :author_id, @authors |> Enum.map(&{&1.first_name <> " " <> &1.last_name, &1.id}) %>
+  <%= select f, :author_id, @authors |> Enum.map(&{&1.first_name <> " " <> &1.last_name, &1.id}), prompt: "" %>
   <%= error_tag f, :author_id %>
 
   <%= label f, :reader_id %>
-  <%= select f, :reader_id, @readers |> Enum.map(&{&1.first_name <> " " <> &1.last_name, &1.id}) %>
+  <%= select f, :reader_id, @readers |> Enum.map(&{&1.first_name <> " " <> &1.last_name, &1.id}), prompt: "" %>
   <%= error_tag f, :reader_id %>
 
   <%= label f, :cover %>

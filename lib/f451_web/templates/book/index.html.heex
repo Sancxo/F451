@@ -3,11 +3,15 @@
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>File</th>
-      <th>Date</th>
       <th>Cover</th>
+      <th>Titre</th>
+      <th>Auteur</th>
+      <th>Pays</th>
+      <th>Genre</th>
+      <th>Date</th>
+      <th>Lecteur</th>
       <th>Synopsis</th>
+      <th>File</th>
 
       <th></th>
     </tr>
@@ -15,11 +19,19 @@
   <tbody>
 <%= for book <- @books do %>
     <tr>
-      <td><%= book.title %></td>
-      <td><%= book.file %></td>
-      <td><%= book.date %></td>
       <td><%= book.cover %></td>
+      <td><%= book.title %></td>
+      <td><%= book.author.first_name %> <%= book.author.last_name %></td>
+      <td><%= book.author.country.name %></td>
+      <td><%= book.genre.name %></td>
+      <td><%= book.date %></td>
+      <td>
+        <%= if book.reader do %>
+          <%= book.reader.first_name %> <%= book.reader.last_name %>
+        <% end %>
+      </td>
       <td><%= book.synopsis %></td>
+      <td><%= book.file %></td>
 
       <td>
         <span><%= link "Show", to: Routes.book_path(@conn, :show, book) %></span>

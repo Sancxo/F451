@@ -444,7 +444,7 @@ defmodule F451.Library do
     Book
     |> Repo.all()
     |> Repo.preload(:genre)
-    |> Repo.preload(:author)
+    |> Repo.preload(author: :country)
     |> Repo.preload(:reader)
   end
 
@@ -463,6 +463,14 @@ defmodule F451.Library do
 
   """
   def get_book!(id), do: Repo.get!(Book, id)
+
+  def get_book_with_preload!(id) do
+    Book
+    |> Repo.get!(id)
+    |> Repo.preload(:genre)
+    |> Repo.preload(author: :country)
+    |> Repo.preload(:reader)
+  end
 
   @doc """
   Creates a book.

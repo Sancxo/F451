@@ -1,15 +1,29 @@
 <h1>Show Book</h1>
 
 <ul>
+  <li>
+    <strong>Cover:</strong>
+    <%= @book.cover %>
+  </li>
 
   <li>
-    <strong>Title:</strong>
+    <strong>Titre:</strong>
     <%= @book.title %>
   </li>
 
   <li>
-    <strong>File:</strong>
-    <%= @book.file %>
+    <strong>Auteur:</strong>
+    <%= @book.author.first_name %> <%= @book.author.last_name %>
+  </li>
+
+  <li>
+    <strong>Pays:</strong>
+    <%= @book.author.country.name %>
+  </li>
+
+  <li>
+    <strong>Genre:</strong>
+    <%= @book.genre.name %>
   </li>
 
   <li>
@@ -18,8 +32,10 @@
   </li>
 
   <li>
-    <strong>Cover:</strong>
-    <%= @book.cover %>
+    <strong>Lecteur:</strong>
+      <%= if @book.reader do %>
+        <%= @book.reader.first_name %> <%= @book.reader.last_name %>
+      <% end %>
   </li>
 
   <li>
@@ -27,6 +43,10 @@
     <%= @book.synopsis %>
   </li>
 
+  <li>
+    <strong>File:</strong>
+    <%= @book.file %>
+  </li>
 </ul>
 
 <span><%= link "Edit", to: Routes.book_path(@conn, :edit, @book) %></span> |

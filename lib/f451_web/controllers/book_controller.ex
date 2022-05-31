@@ -25,6 +25,8 @@ defmodule F451Web.BookController do
   end
 
   def create(conn, %{"book" => book_params}) do
+    IO.inspect(book_params)
+
     case Library.create_book(book_params) do
       {:ok, book} ->
         conn
@@ -46,7 +48,7 @@ defmodule F451Web.BookController do
   end
 
   def show(conn, %{"id" => id}) do
-    book = Library.get_book!(id)
+    book = Library.get_book_with_preload!(id)
     render(conn, "show.html", book: book)
   end
 
