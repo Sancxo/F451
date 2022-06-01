@@ -45,7 +45,11 @@
 
   <li>
     <strong>File:</strong>
-    <%# @book.file %>
+    <%= if @book.file do %>
+      <%= tag "audio", src: F451.BookAudioFiles.url({@book.file, @book}, signed: true), controls: true %>
+    <% else %>
+      <p>Le fichier son de <i><%= @book.title %></i> par <%= @book.author.first_name %> <%= @book.author.last_name %> n'est pas encore disponible.</p>
+    <% end %>
   </li>
 </ul>
 

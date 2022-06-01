@@ -25,6 +25,8 @@ defmodule F451Web.Endpoint do
   # Endpoint for files uploaded with Waffle
   plug Plug.Static, at: "/uploads", from: Path.expand('./uploads'), gzip: false
 
+  plug Plug.Parsers, parsers: [:urlencoded, {:multipart, length: 20_000_000}]
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
