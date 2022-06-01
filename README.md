@@ -22,6 +22,6 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## Todo:
 
-[ ] Import book cover from form
+[x] Import book cover from form
 
-[ ] Import book audio file from form
+[x] Import book audio file from form
