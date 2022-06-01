@@ -6,7 +6,7 @@ defmodule F451.Library.Author do
   alias F451.Library.{Book, Country}
 
   schema "authors" do
-    field :avatar, F451.AuthorsAvatar.Type
+    field :avatar, F451.AuthorAvatars.Type
     field :biography, :string
     field :birthdate, :date
     field :death_date, :date

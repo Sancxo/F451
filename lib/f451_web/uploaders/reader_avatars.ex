@@ -1,6 +1,9 @@
-defmodule F451.AuthorsAvatar do
+defmodule F451.ReaderAvatars do
   use Waffle.Definition
   use Waffle.Ecto.Definition
+
+  # Include ecto support (requires package waffle_ecto installed):
+  # use Waffle.Ecto.Definition
 
   @versions [:original]
   @white_list ~w(.jpg .jpeg .gif .png .webp .avif)
@@ -17,7 +20,7 @@ defmodule F451.AuthorsAvatar do
   #   scope.bucket || bucket()
   # end
 
-  # Whitelist file extensions for authors avatar
+  # Whitelist file extensions:
   def validate({file, _}) do
     file_extension = file.file_name |> Path.extname() |> String.downcase()
 
@@ -33,13 +36,13 @@ defmodule F451.AuthorsAvatar do
   # end
 
   # Override the persisted filenames:
-  # def filename(_version, {_file, author}) do
-  #   "#{author.id}_#{author.last_name}"
+  # def filename(version, _) do
+  #   version
   # end
 
   # Override the storage directory:
   def storage_dir(_version, {_file, _scope}) do
-    "uploads/authors/"
+    "uploads/readers"
   end
 
   # Provide a default URL if there hasn't been a file uploaded

@@ -17,7 +17,7 @@
       <td><%= reader.first_name %></td>
       <td><%= reader.last_name %></td>
       <td><%= reader.pseudo %></td>
-      <td><%= img_tag F451.ReadersAvatar.url({reader.avatar, reader}, signed: true) %></td>
+      <td><%= img_tag F451.ReaderAvatars.url({reader.avatar, reader}, signed: true) %></td>
 
       <td>
         <span><%= link "Show", to: Routes.reader_path(@conn, :show, reader) %></span>

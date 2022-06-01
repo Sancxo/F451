@@ -2,12 +2,13 @@ defmodule F451.Library.Book do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias F451.{BookCovers, BookAudioFiles}
   alias F451.Library.{Author, Reader, Genre}
 
   schema "books" do
-    field :cover, :string
+    field :cover, BookCovers.Type
     field :date, :date
-    field :file, :string
+    field :file, BookAudioFiles.Type
     field :synopsis, :string
     field :title, :string
 

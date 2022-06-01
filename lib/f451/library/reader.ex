@@ -4,7 +4,7 @@ defmodule F451.Library.Reader do
   import Ecto.Changeset
 
   schema "readers" do
-    field :avatar, F451.ReadersAvatar.Type
+    field :avatar, F451.ReaderAvatars.Type
     field :first_name, :string
     field :last_name, :string
     field :pseudo, :string
