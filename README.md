@@ -22,4 +22,4 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## Todo:
 
-- [ ] Create and customize audio reader
+- [ ] Create and customize audio player
