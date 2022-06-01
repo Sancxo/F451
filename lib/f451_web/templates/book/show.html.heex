@@ -3,7 +3,7 @@
 <ul>
   <li>
     <strong>Cover:</strong>
-    <%= @book.cover %>
+    <%= img_tag F451.BookCovers.url({@book.cover, @book}, signed: true) %>
   </li>
 
   <li>
@@ -45,7 +45,7 @@
 
   <li>
     <strong>File:</strong>
-    <%= @book.file %>
+    <%# @book.file %>
   </li>
 </ul>
 
