@@ -52,6 +52,20 @@ defmodule F451.Library do
 
   def get_author!(id), do: Repo.get!(Author, id)
 
+  @doc """
+  Gets a single author with Country preload.
+
+  Raises `Ecto.NoResultsError` if the Author does not exist.
+
+  ## Examples
+
+      iex> get_author!(123)
+      %Author{%Country{}}
+
+      iex> get_author!(456)
+      ** (Ecto.NoResultsError)
+
+  """
   def get_author_with_preload!(id) do
     Author
     |> Repo.get!(id)
@@ -136,12 +150,6 @@ defmodule F451.Library do
   """
   def list_countries do
     Repo.all(Country)
-  end
-
-  def list_countries_id do
-    Country
-    |> select([c], c.id)
-    |> Repo.all()
   end
 
   @doc """
@@ -464,6 +472,19 @@ defmodule F451.Library do
   """
   def get_book!(id), do: Repo.get!(Book, id)
 
+  @doc """
+  Gets a single book with the complete preload (:genre, :reader and [author: :country]).
+
+  Raises `Ecto.NoResultsError` if the Book does not exist.
+
+  ## Examples
+
+      iex> get_book_with_preload!(123)
+      %Book{%Genre{}, %Reader{}, %Author{%Country{}}}
+
+      iex> get_book!(456)
+      ** (Ecto.NoResultsError)
+  """
   def get_book_with_preload!(id) do
     Book
     |> Repo.get!(id)
