@@ -1,43 +1,22 @@
-<h1>Show Author</h1>
+<div>
+  <%= img_tag F451.AuthorAvatars.url({@author.avatar, @author}, signed: true), class: "author-avatar" %>
+  <h1><%= @author.first_name %> <%= @author.last_name %></h1>
+  <p><%= TemplateHelpers.dmy_date(@author.birthdate) %> - <%= TemplateHelpers.dmy_date(@author.death_date) %>, <%= @author.country.name %></p>
 
-<ul>
+  <div>
+    <h5><strong>Biography:</strong></h5>
+    <p><%= @author.biography %></p>
+  </div>
 
-  <li>
-    <strong>Last name:</strong>
-    <%= @author.last_name %>
-  </li>
+  <div>
+    <h5><strong>Books:</strong></h5>
+    <ul>
+      <%= for book <- @author.books  do %>
+        <li><%= link "#{book.title}", to: Routes.book_path(@conn, :show, book.id) %></li>
+      <% end %>
+    </ul>
+  </div>
 
-  <li>
-    <strong>First name:</strong>
-    <%= @author.first_name %>
-  </li>
-
-  <li>
-    <strong>Country:</strong>
-    <%= @author.country.name %>
-  </li>
-
-  <li>
-    <strong>Birthdate:</strong>
-    <%= @author.birthdate %>
-  </li>
-
-  <li>
-    <strong>Death date:</strong>
-    <%= @author.death_date %>
-  </li>
-
-  <li>
-    <strong>Avatar:</strong>
-    <%= img_tag F451.AuthorAvatars.url({@author.avatar, @author}, signed: true) %>
-  </li>
-
-  <li>
-    <strong>Biography:</strong>
-    <%= @author.biography %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.author_path(@conn, :edit, @author) %></span> |
-<span><%= link "Back", to: Routes.author_path(@conn, :index) %></span>
+  <span><%= link "Edit", to: Routes.author_path(@conn, :edit, @author) %></span> |
+  <span><%= link "Back", to: Routes.author_path(@conn, :index) %></span>
+</div>

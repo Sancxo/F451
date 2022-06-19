@@ -70,6 +70,7 @@ defmodule F451.Library do
     Author
     |> Repo.get!(id)
     |> Repo.preload(:country)
+    |> Repo.preload(:books)
   end
 
   @doc """
