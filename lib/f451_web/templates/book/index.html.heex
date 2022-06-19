@@ -20,13 +20,13 @@
     <tr>
       <td><%= img_tag F451.BookCovers.url({book.cover, book}, signed: true) %></td>
       <td><%= book.title %></td>
-      <td><%= book.author.first_name %> <%= book.author.last_name %></td>
-      <td><%= book.author.country.name %></td>
-      <td><%= book.genre.name %></td>
+      <td><%= link "#{book.author.first_name} #{book.author.last_name}", to: Routes.author_path(@conn, :show, book.author.id) %></td>
+      <td><%= link "#{book.author.country.name}", to: Routes.country_path(@conn, :show, book.author.country.id) %></td>
+      <td><%= link "#{book.genre.name}", to: Routes.genre_path(@conn, :show, book.genre.id) %></td>
       <td><%= book.date %></td>
       <td>
         <%= if book.reader do %>
-          <%= book.reader.first_name %> <%= book.reader.last_name %>
+          <%= link(book.reader.last_name != "N.A." && "#{book.reader.first_name} #{book.reader.last_name}" || "#{book.reader.pseudo}", to: Routes.reader_path(@conn, :show, book.reader.id)) %>
         <% end %>
       </td>
       <td><%= book.synopsis %></td>
